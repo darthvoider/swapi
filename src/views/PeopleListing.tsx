@@ -1,34 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import { Grid, Container, Pagination } from "@mui/material";
-import { fetchPeople } from "../api";
 import { PeopleCard } from "../components/PeopleCard";
 import { TCharacter } from "../types";
 import { PeopleListingLoader } from "../components/Loaders";
-import { queryClient } from "../providers/ReactQueryProvider";
-
-const STALE_TIME = 50000;
-const QUERY_KEY = "people";
+import { usePeopleFetching } from "../hooks";
 
 export const PeopleListing = (): React.JSX.Element => {
-  const [page, setPage] = useState(1);
-  const { data, isFetching, isPreviousData } = useQuery({
-    queryKey: [QUERY_KEY, page],
-    queryFn: () => fetchPeople(page),
-    keepPreviousData: true,
-    staleTime: STALE_TIME,
-  });
-
-  // Prefetch the next page
-  useEffect(() => {
-    if (!isPreviousData && data?.next) {
-      queryClient.prefetchQuery({
-        queryKey: [QUERY_KEY, page + 1],
-        queryFn: () => fetchPeople(page + 1),
-        staleTime: STALE_TIME,
-      });
-    }
-  }, [data, isPreviousData, page, queryClient]);
+  const { setPage, data, isFetching, page } = usePeopleFetching();
 
   return (
     <Container sx={{ py: "4rem" }}>
