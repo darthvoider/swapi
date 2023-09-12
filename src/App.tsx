@@ -1,11 +1,11 @@
 import * as React from "react";
-import Container from "@mui/material/Container";
 import { ReactQueryProvider } from "./providers";
+import { PeopleListing } from "./views";
 
 export default function App() {
   return (
     <ReactQueryProvider>
-      <Container>May the Force be with you</Container>
+      <PeopleListing />
     </ReactQueryProvider>
   );
 }

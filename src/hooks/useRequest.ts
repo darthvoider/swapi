@@ -9,7 +9,7 @@ export const useRequest = () => {
   const query = (
     key: QueryKey,
     queryFunction: QueryFunction,
-    options: QueryOptions = {}
+    options: any = {}
   ) => {
     return useQuery({
       queryKey: key,
