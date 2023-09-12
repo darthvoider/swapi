@@ -5,15 +5,12 @@ import {
   Typography,
   CardActions,
   Button,
+  Box,
 } from "@mui/material";
+import { TCharacter } from "../../types";
 // name, birth year, height, and date created in the format of DD/MM/YYYY HH:MM.
 type TPeopleCardProps = {
-  character: {
-    name: string;
-    birthYear: string;
-    height: string;
-    created: string;
-  };
+  character: TCharacter;
 };
 
 export const PeopleCard = ({
@@ -42,8 +39,11 @@ export const PeopleCard = ({
           Name: {character.name}
         </Typography>
         {CHARACTER_DESC.map(({ title, value }) => (
-          <Typography variant="subtitle1" color="text.secondary">
-            {title}: {value}
+          <Typography variant="body1" color="text.secondary">
+            <Box component="span" fontWeight="fontWeightMedium">
+              {title}
+            </Box>
+            : {value}
           </Typography>
         ))}
       </CardContent>
