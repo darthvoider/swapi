@@ -1,0 +1,1 @@
+export { PeopleListingLoader } from "./PeopleListingLoader";

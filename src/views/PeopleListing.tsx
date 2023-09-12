@@ -4,6 +4,7 @@ import { Grid, Container } from "@mui/material";
 import { fetchPeople } from "../api";
 import { PeopleCard } from "../components/PeopleCard";
 import { TCharacter } from "../types";
+import { PeopleListingLoader } from "../components/Loaders";
 
 export const PeopleListing = (): React.JSX.Element => {
   const { data, isLoading } = useQuery({
@@ -15,6 +16,8 @@ export const PeopleListing = (): React.JSX.Element => {
   return (
     <Container sx={{ py: "4rem" }}>
       <Grid container spacing={6}>
+        {isLoading && <PeopleListingLoader number={10} />}
+
         {data?.results.map((character: TCharacter) => (
           <Grid item sm={6}>
             <PeopleCard character={character} key={character.url} />
