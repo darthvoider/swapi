@@ -39,7 +39,7 @@ export const PeopleCard = ({
           Name: {character.name}
         </Typography>
         {CHARACTER_DESC.map(({ title, value }) => (
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" key={title}>
             <Box component="span" fontWeight="fontWeightMedium">
               {title}
             </Box>

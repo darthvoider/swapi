@@ -6,5 +6,9 @@ const baseURL = "https://swapi.dev/api/";
 
 export const axiosClient = axios.create({ baseURL });
 
-export const fetchPeople = (): Promise<IPeopleData | Camelized<any>> =>
-  axiosClient.get("/people/").then((res) => humps.camelizeKeys(res.data));
+export const fetchPeople = (
+  page: number
+): Promise<IPeopleData | Camelized<any>> =>
+  axiosClient
+    .get(`/people/?page=${page}`)
+    .then((res) => humps.camelizeKeys(res.data));
