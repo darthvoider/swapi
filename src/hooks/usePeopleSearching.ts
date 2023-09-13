@@ -1,20 +1,20 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { searchPeople } from "../api";
+import { useDebounce } from "./useDebounce";
 export const usePeopleSearching = () => {
-  const [searchParam, setSearchParam] = useState("");
+  const { debouncedValue, setValue } = useDebounce("", 1000);
 
   const { data, isFetching } = useQuery({
     queryKey: ["searchResult"],
-    queryFn: () => searchPeople(searchParam),
+    queryFn: () => searchPeople(debouncedValue),
     refetchOnWindowFocus: false,
-    enabled: !!searchParam.length,
+    enabled: !!debouncedValue.length,
   });
 
   return {
     searchData: data,
     isSearchFetching: isFetching,
-    setSearchParam,
-    searchParam,
+    setSearchParam: setValue,
+    searchParam: debouncedValue,
   };
 };
