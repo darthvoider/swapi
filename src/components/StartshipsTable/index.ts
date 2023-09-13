@@ -1,0 +1,1 @@
+export { StarshipsTable } from "./StarshipsTable";
