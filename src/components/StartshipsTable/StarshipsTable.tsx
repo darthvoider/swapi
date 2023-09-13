@@ -26,9 +26,9 @@ export const StarshipsTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {starships.map((starship) => (
+          {starships.map((starship, index) => (
             <TableRow
-              key={starship?.name}
+              key={`${starship?.name}_${index}`}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
