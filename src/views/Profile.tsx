@@ -37,6 +37,7 @@ export const Profile = (): React.ReactElement => {
         )}
 
         {!isFetchingSpecie &&
+          !isFetchingCharacter &&
           Object.entries(restProfile).map(
             ([title, value]) =>
               value && (

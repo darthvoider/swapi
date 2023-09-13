@@ -31,6 +31,7 @@ export const useProfileQuery = () => {
     queryKey: ["starship", id],
     queryFn: () => fetchStarships(id),
     enabled: !!id,
+    refetchOnWindowFocus: false,
   }));
 
   const starshipsResponse = useQueries({
