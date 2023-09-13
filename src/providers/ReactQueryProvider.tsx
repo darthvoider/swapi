@@ -6,8 +6,8 @@ export const queryClient = new QueryClient();
 export const ReactQueryProvider = ({
   children,
 }: {
-  children: React.JSX.Element;
-}): React.JSX.Element => {
+  children: React.ReactElement;
+}): React.ReactElement => {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

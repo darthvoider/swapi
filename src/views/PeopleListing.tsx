@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid, Container, Pagination, TextField } from "@mui/material";
 import { PeopleCard } from "../components/PeopleCard";
-import { TCharacter } from "../types";
+import { ICharacter } from "../types";
 import { PeopleListingLoader } from "../components/Loaders";
 import { usePeopleFetching } from "../hooks";
 
-export const PeopleListing = (): React.JSX.Element => {
+export const PeopleListing = (): React.ReactElement => {
   const { setPage, data, isFetching, page, setSearchParam } =
     usePeopleFetching();
 
@@ -25,7 +25,7 @@ export const PeopleListing = (): React.JSX.Element => {
         {isFetching && <PeopleListingLoader number={10} />}
 
         {!isFetching &&
-          data?.results.map((character: TCharacter) => (
+          data?.results.map((character: ICharacter) => (
             <Grid item sm={6} key={character.url}>
               <PeopleCard character={character} />
             </Grid>

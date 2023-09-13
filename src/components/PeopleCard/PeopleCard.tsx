@@ -7,13 +7,13 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { TCharacter } from "../../types";
+import { ICharacter } from "../../types";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { decamelize } from "humps";
+import { DDMMYYYYHHMM } from "../../constants";
 
 type TPeopleCardProps = {
-  character: TCharacter;
+  character: ICharacter;
 };
 
 export const PeopleCard = ({
@@ -35,7 +35,7 @@ export const PeopleCard = ({
 
     {
       title: "Created",
-      value: dayjs(character.created).format("DD/MM/YYYY HH:MM"),
+      value: dayjs(character.created).format(DDMMYYYYHHMM),
     },
   ];
 
