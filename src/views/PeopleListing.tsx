@@ -7,17 +7,27 @@ import { usePeopleFetching, usePeopleSearching } from "../hooks";
 
 export const PeopleListing = (): React.JSX.Element => {
   const {
-    setPage,
+    setPage: setPageForFetching,
     data: fetchedData,
     isFetching: isFetchingData,
-    page,
+    page: fetchPage,
   } = usePeopleFetching();
 
-  const { searchData, searchParam, setSearchParam, isSearchFetching } =
-    usePeopleSearching();
+  const {
+    searchData,
+    searchParam,
+    setSearchParam,
+    isSearchFetching,
+    searchPage,
+    setSearchPage,
+  } = usePeopleSearching();
 
-  const dataToShow = !!searchParam.length ? searchData : fetchedData;
-  const isFetchingToShow = isSearchFetching || isFetchingData;
+  const dataToUse = !!searchParam.length ? searchData : fetchedData;
+  const isFetchingToUse = isSearchFetching || isFetchingData;
+  const pageToUse = !!searchParam.length ? searchPage : fetchPage;
+  const setPageToUse = !!searchParam.length
+    ? setSearchPage
+    : setPageForFetching;
 
   return (
     <Container sx={{ py: "4rem" }}>
@@ -28,10 +38,10 @@ export const PeopleListing = (): React.JSX.Element => {
         onChange={({ target }) => setSearchParam(target.value)}
       />
       <Grid container spacing={6}>
-        {isFetchingToShow && <PeopleListingLoader number={10} />}
+        {isFetchingToUse && <PeopleListingLoader number={10} />}
 
-        {!isFetchingToShow &&
-          dataToShow?.results.map((character: TCharacter) => (
+        {!isFetchingToUse &&
+          dataToUse?.results.map((character: TCharacter) => (
             <Grid item sm={6} key={character.url}>
               <PeopleCard character={character} />
             </Grid>
@@ -39,10 +49,10 @@ export const PeopleListing = (): React.JSX.Element => {
 
         <Grid item>
           <Pagination
-            count={Math.ceil(dataToShow?.count / 10) || 10}
+            count={Math.ceil(dataToUse?.count / 10) || 1}
             color="primary"
-            page={page}
-            onChange={(_, page) => setPage(page)}
+            page={pageToUse}
+            onChange={(_, page) => setPageToUse(page)}
           />
         </Grid>
       </Grid>

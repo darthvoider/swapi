@@ -14,8 +14,9 @@ export const fetchPeople = (
     .then((res) => humps.camelizeKeys(res.data));
 
 export const searchPeople = (
-  searchParam: string
+  searchParam: string,
+  page: number
 ): Promise<IPeopleData | Camelized<any>> =>
   axiosClient
-    .get(`/people/?search=${searchParam}`)
+    .get(`/people/?search=${searchParam}&page=${page}`)
     .then((res) => humps.camelizeKeys(res.data));
