@@ -5,7 +5,9 @@ import { decamelize } from "humps";
 import { StarshipsTable } from "../components/StartshipsTable";
 
 export const Profile = (): React.ReactElement => {
-  const { name, starships, ...restProfile } = useProfileQuery();
+  const { name, starships, isFetching, ...restProfile } = useProfileQuery();
+
+  console.log(isFetching, "isFetching>>>");
 
   return (
     <Container sx={{ py: "4rem" }}>

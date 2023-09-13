@@ -20,7 +20,7 @@ export const useProfileQuery = () => {
     getSpecieId(starShipUrl)
   );
 
-  const { data: specieData } = useQuery({
+  const { data: specieData, isFetching: isFetchingSpecie } = useQuery({
     queryKey: ["species", specieId],
     queryFn: () => fetchSpecies(specieId),
     refetchOnWindowFocus: false,
@@ -48,5 +48,14 @@ export const useProfileQuery = () => {
     starships: starshipsResponse.map(({ data }) => data),
   };
 
-  return { ...fullProfile };
+  return {
+    ...fullProfile,
+    isFetching: {
+      isFetchingCharacter,
+      isFetchingSpecie,
+      isFetchingStarships: starshipsResponse.map(
+        ({ isFetching }) => isFetching
+      ),
+    },
+  };
 };
