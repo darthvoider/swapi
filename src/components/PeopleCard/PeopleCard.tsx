@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { TCharacter } from "../../types";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
+import { decamelize } from "humps";
 
 type TPeopleCardProps = {
   character: TCharacter;
@@ -17,6 +19,9 @@ type TPeopleCardProps = {
 export const PeopleCard = ({
   character,
 }: TPeopleCardProps): React.ReactElement => {
+  const parts = character.url.split("/");
+  const id = parts[parts.length - 2];
+
   const CHARACTER_DESC = [
     {
       title: "Birth Year",
@@ -33,6 +38,7 @@ export const PeopleCard = ({
       value: dayjs(character.created).format("DD/MM/YYYY HH:MM"),
     },
   ];
+
   return (
     <Card>
       <CardContent>
@@ -49,7 +55,9 @@ export const PeopleCard = ({
         ))}
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">
+          <Link to={`people/${id}`}>Learn More</Link>
+        </Button>
       </CardActions>
     </Card>
   );

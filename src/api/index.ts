@@ -20,3 +20,6 @@ export const searchPeople = (
   axiosClient
     .get(`/people/?search=${searchParam}&page=${page}`)
     .then((res) => humps.camelizeKeys(res.data));
+
+export const fetchProfile = (id?: string) =>
+  axiosClient.get(`/people/${id}`).then((res) => humps.camelizeKeys(res.data));
