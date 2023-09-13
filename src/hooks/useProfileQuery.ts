@@ -8,7 +8,7 @@ import { DDMMYYYYHHMM } from "../constants";
 export const useProfileQuery = () => {
   const { id } = useParams();
 
-  const { data: character, isFetching } = useQuery({
+  const { data: character, isFetching: isFetchingCharacter } = useQuery({
     queryKey: ["profile", id],
     queryFn: () => fetchProfile(id),
     refetchOnWindowFocus: false,
@@ -36,8 +36,6 @@ export const useProfileQuery = () => {
   const starshipsResponse = useQueries({
     queries: starshipQueries || [],
   });
-
-  console.log(starshipsResponse, "starshipsResponse>>>");
 
   const fullProfile = {
     name: character?.name,
