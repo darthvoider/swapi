@@ -12,6 +12,7 @@ export const PeopleListing = (): React.JSX.Element => {
   return (
     <Container sx={{ py: "4rem" }}>
       <TextField
+        sx={{ mb: "2rem" }}
         disabled={isFetching}
         label="Search"
         variant="outlined"
@@ -30,8 +31,9 @@ export const PeopleListing = (): React.JSX.Element => {
             </Grid>
           ))}
 
-        <Grid item>
+        <Grid item xs={12}>
           <Pagination
+            sx={{ mt: "2rem" }}
             count={Math.ceil(data?.count / 10) || 1}
             color="primary"
             page={page}
