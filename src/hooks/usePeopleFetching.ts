@@ -20,6 +20,7 @@ export const usePeopleFetching = (): TReturnType => {
     queryFn: () => fetchPeople(page),
     keepPreviousData: true,
     staleTime: STALE_TIME,
+    refetchOnWindowFocus: false,
   });
 
   // Prefetch the next page

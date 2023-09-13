@@ -10,6 +10,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "axios": "^1.5.0",
+    "dayjs": "^1.11.9",
     "humps": "^2.0.1",
     "react": "latest",
     "react-dom": "latest",

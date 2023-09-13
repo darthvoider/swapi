@@ -8,7 +8,8 @@ import {
   Box,
 } from "@mui/material";
 import { TCharacter } from "../../types";
-// name, birth year, height, and date created in the format of DD/MM/YYYY HH:MM.
+import dayjs from "dayjs";
+
 type TPeopleCardProps = {
   character: TCharacter;
 };
@@ -29,7 +30,7 @@ export const PeopleCard = ({
 
     {
       title: "Created",
-      value: character.created,
+      value: dayjs(character.created).format("DD/MM/YYYY HH:MM"),
     },
   ];
   return (
