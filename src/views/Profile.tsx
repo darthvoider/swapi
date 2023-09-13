@@ -1,19 +1,26 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProfile } from "../api";
+import { useProfileQuery } from "../hooks";
+import { Paper, Container, Typography } from "@mui/material";
+import { decamelize } from "humps";
 
 export const Profile = (): React.ReactElement => {
-  const { id } = useParams();
+  const { name, starships, ...restProfile } = useProfileQuery();
 
-  const { data, isFetching } = useQuery({
-    queryKey: ["profile", id],
-    queryFn: () => fetchProfile(id),
-    refetchOnWindowFocus: false,
-    enabled: !!id,
-  });
+  console.log(Object.entries(restProfile), "fullProfile>>>");
 
-  console.log(data, "data>>>");
-
-  return <div></div>;
+  return (
+    <Container sx={{ py: "4rem" }}>
+      <Paper elevation={3} sx={{ p: "2rem" }}>
+        <Typography variant="h2">Name: {name}</Typography>
+        {Object.entries(restProfile).map(
+          ([title, value]) =>
+            value && (
+              <Typography variant="h5" key={title} sx={{ py: "0.5rem" }}>
+                {decamelize(title, { separator: " " }).toUpperCase()}: {value}
+              </Typography>
+            )
+        )}
+      </Paper>
+    </Container>
+  );
 };
