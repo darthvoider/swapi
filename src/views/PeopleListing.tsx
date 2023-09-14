@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, Container, Pagination, TextField } from "@mui/material";
 import { PeopleCard } from "../components/PeopleCard";
 import { ICharacter } from "../types";
-import { PeopleListingLoader } from "../components/Loaders";
 import { usePeopleFetching } from "../hooks";
+import { PeopleListingLoader } from "../hoc";
 
 export const PeopleListing = (): React.ReactElement => {
   const { setPage, data, isFetching, page, setSearchParam } =
@@ -22,14 +22,15 @@ export const PeopleListing = (): React.ReactElement => {
         }}
       />
       <Grid container spacing={6}>
-        {isFetching && <PeopleListingLoader number={10} />}
-
-        {!isFetching &&
-          data?.results.map((character: ICharacter) => (
-            <Grid item sm={6} key={character.url}>
-              <PeopleCard character={character} />
-            </Grid>
-          ))}
+        <PeopleListingLoader number={10} isFetching={isFetching}>
+          <>
+            {data?.results.map((character: ICharacter) => (
+              <Grid item sm={6} key={character.url}>
+                <PeopleCard character={character} />
+              </Grid>
+            ))}
+          </>
+        </PeopleListingLoader>
 
         <Grid item xs={12}>
           <Pagination
